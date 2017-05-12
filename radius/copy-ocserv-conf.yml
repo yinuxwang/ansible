@@ -1,0 +1,5 @@
+- hosts: radius-amazon
+  remote_user: ec2-user
+  sudo: yes
+  tasks:
+  - copy: src=/home/ubuntu/ocserv/radius-ocserv-centos/ocserv/ocserv.conf dest=/etc/ocserv/ocserv.conf owner=root group=root mode=0644 backup=yes

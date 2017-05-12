@@ -1,0 +1,12 @@
+- hosts: cert-ubuntu
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+  - name: remove old kernels
+    command: apt-get remove linux-image-4.4.0-* -yqq
+  - name: remove old kernels headers
+    command: apt-get autoremove -yqq
+  - name: Update grub
+    command: update-grub

@@ -1,0 +1,5 @@
+- hosts: radius-amazon
+  remote_user: ec2-user
+  sudo: yes
+  tasks:
+  - copy: src=/home/ubuntu/ocserv/radius-ocserv-centos/ocserv/profile.xml dest=/var/lib/ocserv/profile.xml owner=root group=root mode=0644 backup=yes

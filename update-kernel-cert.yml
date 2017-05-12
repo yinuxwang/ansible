@@ -1,0 +1,28 @@
+- hosts: cert-ubuntu
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+  - name: Download kernel files
+    command: wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.14/linux-image-4.10.14-041014-generic_4.10.14-041014.201705031501_amd64.deb
+  - name: Download headers
+    command: wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.14/linux-headers-4.10.14-041014_4.10.14-041014.201705031501_all.deb
+  - name: Download generic header files
+    command: wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.10.14/linux-headers-4.10.14-041014-generic_4.10.14-041014.201705031501_amd64.deb
+  - name: Install Generic kernel
+    command: dpkg -i linux-image-4.10.14-041014-generic_4.10.14-041014.201705031501_amd64.deb
+  - name: Install header files
+    command: dpkg -i linux-headers-4.10.14-041014_4.10.14-041014.201705031501_all.deb
+  - name: Install generic header files
+    command: dpkg -i linux-headers-4.10.14-041014-generic_4.10.14-041014.201705031501_amd64.deb
+  - name: Update grub
+    command: update-grub
+  #- shell: echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+  #- shell: echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+  - name: restart machine
+    shell: sleep 2 && shutdown -r now "Ansible updates triggered"
+    async: 1
+    poll: 0
+    sudo: true
+    ignore_errors: true

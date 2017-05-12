@@ -1,0 +1,5 @@
+- hosts: cert-ubuntu
+  remote_user: ubuntu
+  sudo: yes
+  tasks:
+  - copy: src=/home/ubuntu/ocserv/cert-ocserv-ubuntu/ocserv/ocserv.conf dest=/etc/ocserv/ocserv.conf owner=root group=root mode=0644 backup=yes

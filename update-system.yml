@@ -1,0 +1,12 @@
+- hosts: cert-ubuntu
+  remote_user: ubuntu
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+  - name: Update cache system
+    apt:
+      update_cache: yes
+  - name: Update system
+    apt: 
+      upgrade: dist
